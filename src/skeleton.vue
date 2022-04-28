@@ -46,7 +46,8 @@ export default {
     width: [String, Number],
     height: [String, Number],
     circle: Boolean,
-    loading: undefined
+    loading: undefined,
+    aspect: String,
   },
   computed: {
     isLoading() {
@@ -55,7 +56,7 @@ export default {
   },
   render(h) {
     const {
-      width, height, duration, prefix, circle, count, tag, isLoading
+      width, height, duration, prefix, circle, count, tag, isLoading, aspect
     } = this;
     const classes = [`${prefix}-skeleton`];
     const elements = [];
@@ -66,8 +67,13 @@ export default {
     } else {
       styles.backgroundImage = '';
     }
-    if (width) styles.width = width;
-    if (height) styles.height = height;
+    if(aspect){
+      styles.width = '100%';
+      styles.aspect-ratio="3/4";
+    }else{
+      if (width) styles.width = width;
+      if (height) styles.height = height;
+    }
     if (circle) styles.borderRadius = '50%';
 
     for (let i = 0; i < count; i += 1) {
